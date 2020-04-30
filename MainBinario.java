@@ -38,7 +38,7 @@ public class MainBinario {
                         Puntero.setLD(PunteroAux);
                     }else
                     {
-                        while(Puntero.getLI() != null && Puntero.getDato() < Cadena[Punt])
+                        while(Puntero.getLI() != null && Puntero.getDato() > Cadena[Punt])
                         {
                             Puntero = Puntero.getLI();  
                         }
@@ -70,7 +70,7 @@ public class MainBinario {
                 {
                     while(Puntero.getLI() != null && Puntero.getDato() > Cadena[Punt])
                     {
-                        Puntero = Puntero.getLI();
+                        Puntero = Puntero.getLI();  
                     }
                         
                     if(Puntero.getDato() > Cadena[Punt])
