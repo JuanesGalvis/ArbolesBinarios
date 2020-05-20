@@ -129,9 +129,18 @@ public class Arboles {
                                  System.out.println("DIGITE EL DATO: ");
                                  char DatoA = date.nextLine().charAt(0);
                                  
-                                 Arbol.MostrarHermanos(R, DatoA);
+                                 Arbol.Ancestros(R, DatoA);
                                 
-                                break; 
+                                break;
+                                
+                             case 9:
+                                 
+                                 System.out.println("DIGITE EL DATO: ");
+                                 char DatoPr = date.nextLine().charAt(0);
+                                 
+                                 Arbol.Primos(R, DatoPr);
+                                 
+                                 break;
                                 
                             default:
                                 

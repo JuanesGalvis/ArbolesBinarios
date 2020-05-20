@@ -190,6 +190,15 @@ public class MainBinario {
             {
                 return true;
             }
+            
+            if(Dato < Padre.getDato()){
+                
+                Padre= Padre.getLI();
+            
+            }else{
+                
+                Padre= Padre.getLD();
+            }
            
         }
         
@@ -215,7 +224,6 @@ public class MainBinario {
             {
                 q = q.getLD();
             }
-            
             
             Padre = q;
             q = q.getLI();
@@ -261,7 +269,7 @@ public class MainBinario {
     }
     }
     
-    public void PadresHermanos(Nodo Padre, char Dato)
+    public void Ancestros(Nodo Padre, char Dato)
     {
         Nodo q = Padre;
         String Familia = "";
@@ -323,6 +331,118 @@ public class MainBinario {
         }
     }
     
+    public void Primos(Nodo Padre, char Dato)
+    {
+       if(ValidarRegistro(Padre, Dato))
+       {
+           int NivelDato = MostrarNivel(Padre, 0, Dato);
+           if(Dato == Padre.getDato())
+           {
+               System.out.println("Al ser raiz no tiene primos");
+           }else
+           {
+               if(NivelDato == 2)
+               {
+                   /* SI ES HIJO DE RAIZ (NIVEL = 1) */
+                   System.out.println("Al ser hijo de raiz no tiene primos");
+               
+               }else if(NivelDato == 3)
+               {
+                   /* PRIMOS PARA REGISTRO EN NIVEL 3 */
+                   if(Dato > Padre.getDato())
+                    {
+                        Padre = Padre.getLI();
+
+                    }else
+                    {
+                        Padre = Padre.getLD();
+                    }
+                   
+                    System.out.println("PRIMOS: ");
+                    if(Padre.getLD() != null)
+                    {
+                        System.out.println(Padre.getLD().getDato());
+                    }
+                    
+                    if(Padre.getLI() != null)
+                    {
+                        System.out.println(Padre.getLI().getDato());
+                    }
+                    
+                    if(Padre.getLI() == null && Padre.getLD() == null)
+                    {
+                        System.out.println("No tiene primos");
+                    }
+                   
+               }else
+               {
+                   Nodo Abuelo = Padre;
+                   int contador = 1;
+                   /* MostrarNivel(Padre, 0, Padre.getDato()) !=   */
+                   while(contador != NivelDato-1)
+                   {
+                        while (Padre.getLD() != null && Padre.getDato() < Dato && contador != NivelDato-1) {
+                           Abuelo = Padre;
+                           Padre = Padre.getLD();
+                           contador++;
+                        }
+                       
+                        while (Padre.getLI() != null && Padre.getDato() > Dato && contador != NivelDato-1) {
+                           Abuelo = Padre;
+                           Padre = Padre.getLI();
+                           contador++;
+                        }
+                   }
+                   
+                   if(Abuelo.getLD() == Padre && Abuelo.getLI() != null)
+                   {
+                       Abuelo = Abuelo.getLI();
+                       System.out.println("PRIMOS:");
+                       if(Abuelo.getLD() != null)
+                        {
+                            System.out.println(Abuelo.getLD().getDato());
+                        }
+
+                        if(Abuelo.getLI() != null)
+                        {
+                            System.out.println(Abuelo.getLI().getDato());
+                        }
+
+                        if(Abuelo.getLI() == null && Abuelo.getLD() == null)
+                        {
+                            System.out.println("No tiene primos");
+                        }
+                   
+                   }else if(Abuelo.getLI() == Padre && Abuelo.getLD() != null)
+                   {
+                       Abuelo = Abuelo.getLD();
+                       System.out.println("PRIMOS:");
+                       if(Abuelo.getLD() != null)
+                        {
+                            System.out.println(Abuelo.getLD().getDato());
+                        }
+
+                        if(Abuelo.getLI() != null)
+                        {
+                            System.out.println(Abuelo.getLI().getDato());
+                        }
+
+                        if(Abuelo.getLI() == null && Abuelo.getLD() == null)
+                        {
+                            System.out.println("No tiene primos");
+                        }
+                   }else
+                   {
+                       System.out.println("NO TIENE TÍO");
+                   }
+               }
+           }
+       }else
+       {
+           System.out.println("ESTE DATO NO EXISTE!");
+       }
+    }
+    
     public MainBinario(Nodo Punta) {
         this.Punta = Punta;
     }
@@ -334,6 +454,4 @@ public class MainBinario {
     public void setPunta(Nodo Punta) {
         this.Punta = Punta;
     }
-    
-    
 }
