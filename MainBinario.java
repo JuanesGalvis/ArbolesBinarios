@@ -134,6 +134,195 @@ public class MainBinario {
         }
     }
 
+    public void MostrarHojas(Nodo Padre)
+    {
+        if(Padre != null)
+        {
+            MostrarHojas(Padre.getLI());
+            if( Padre.getLD() == null && Padre.getLI() == null){
+                
+                System.out.println("|"+ Padre.getDato()+"|");
+            }
+            MostrarHojas(Padre.getLD());
+        }
+    }
+    
+    public void MostrarPadres(Nodo Padre)
+    {
+        if(Padre != null)
+        {
+            MostrarHojas(Padre.getLI());
+            if( Padre.getLD() != null || Padre.getLI() != null){
+                
+                System.out.println("|"+ Padre.getDato()+"|");
+            }
+            MostrarHojas(Padre.getLD());
+        }
+    }
+    
+    public int MostrarNivel(Nodo Padre, int contador ,char Dato)
+    {
+        while(Padre != null)
+        {
+            contador++;
+            if(Padre.getDato() == Dato)
+            {
+                return contador;
+            }
+            
+            if(Padre.getDato() > Dato)
+            {
+                Padre = Padre.getLI();
+            }else
+            {
+                Padre = Padre.getLD();
+            }
+        }
+        
+        return 0;
+    }
+    
+    public boolean ValidarRegistro(Nodo Padre , char Dato)
+    {
+        while(Padre != null)
+        {
+            if(Padre.getDato() == Dato)
+            {
+                return true;
+            }
+           
+        }
+        
+        return false;
+        
+    }
+    
+    public void MostrarHermanos(Nodo Padre, char Dato)
+    {
+        Nodo q = Padre;
+        boolean Bandera = false;
+        if(Dato == Padre.getDato())
+        {
+            
+            System.out.println("No tiene hermanos!");
+            
+        }else 
+        {
+            if(Dato < Padre.getDato())
+            {
+                q = q.getLI();
+            }else
+            {
+                q = q.getLD();
+            }
+            
+            
+            Padre = q;
+            q = q.getLI();
+            
+            if(ValidarRegistro(Padre, Dato))
+            {
+                
+                while(!Bandera)
+                {
+
+                    while (q.getLD() != null && q.getDato() < Dato) {
+                        Padre = q;
+                        q = q.getLD();
+                    }
+
+                    while (q.getLI() != null && q.getDato() > Dato) {
+                        Padre = q;
+                        q = q.getLI();
+                    }
+
+                    if(q.getDato() == Dato)
+                    {
+                        if(Padre.getLD() == q && Padre.getLI() != null)
+                        {
+                            System.out.println("EL HERMANO DE "+ Dato +" es: "+Padre.getLI().getDato());
+                            Bandera = true;
+                        }else if( Padre.getLI() == q && Padre.getLD() != null )
+                        {
+                            System.out.println("EL HERMANO DE "+ Dato +" es: "+Padre.getLD().getDato());
+                            Bandera = true;
+                        }else
+                        {
+                            System.out.println("NO TIENE HERMANOS :(");
+                            Bandera = true;
+                        }
+                    }
+                }
+                
+            }else
+            {
+                System.out.println("ESTE DATO NO EXISTE!");
+            }
+    }
+    }
+    
+    public void PadresHermanos(Nodo Padre, char Dato)
+    {
+        Nodo q = Padre;
+        String Familia = "";
+        boolean Bandera = false;
+        
+        if(ValidarRegistro(Padre, Dato))
+        {
+            
+            if(Padre.getDato() == Dato)
+            {
+                System.out.println("No tiene ancestros!");
+            
+            }else 
+            {
+                if(Dato < Padre.getDato())
+                {
+                    q = q.getLI();
+                }else
+                {
+                    q = q.getLD();
+                }
+
+                Padre = q;
+                q = q.getLI();
+
+                if(ValidarRegistro(Padre, Dato))
+                {
+
+                    while(!Bandera)
+                    {
+
+                        while (q.getLD() != null && q.getDato() < Dato) {
+                            Padre = q;
+                            q = q.getLD();
+                            Familia += Padre.getDato();
+                        }
+
+                        while (q.getLI() != null && q.getDato() > Dato) {
+                            Padre = q;
+                            q = q.getLI();
+                            Familia += Padre.getDato();
+                        }
+
+                        if(q.getDato() == Dato)
+                        {
+                            Familia += Padre.getDato();
+                            Bandera = true;
+                        }
+                    }
+                    
+                    System.out.println("Ancestro de " + Dato + "son: " + Familia);
+
+                }
+            }
+        // FIN VALIDAR REGISTROS
+        }else
+        {
+           System.out.println("ESTE DATO NO EXISTE!");
+        }
+    }
+    
     public MainBinario(Nodo Punta) {
         this.Punta = Punta;
     }

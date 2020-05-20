@@ -10,8 +10,7 @@ public class Arboles {
         System.out.println("ÁRBOLES");
         System.out.println("-----------------");
         System.out.println("[1] BINARIO");
-        System.out.println("[2] NARIO");
-        System.out.println("[3] SALIR");
+        System.out.println("[2] SALIR");
         System.out.println("-----------------");
         System.out.println("Opción: ");
     }
@@ -23,13 +22,23 @@ public class Arboles {
         System.out.println("[1] MOSTRAR INORDEN");
         System.out.println("[2] MOSTRAR PREORDEN");
         System.out.println("[3] MOSTRAR POSTORDEN");
-        System.out.println("[4] SALIR");
+        System.out.println("-----------------");
+        System.out.println("[4] MOSTRAR HOJAS");
+        System.out.println("[5] MOSTRAR PADRES");
+        System.out.println("[6] NIVEL DE UN REGISTRO");
+        System.out.println("[7] MOSTRAR HERMANOS");
+        System.out.println("[8] PADRES Y ANCESTROS");
+        System.out.println("[9] MOSTRAR PRIMOS");
+        System.out.println("[10] MOSTRAR REGISTRO");
+        System.out.println("-----------------");
+        System.out.println("[11] SALIR");
     }
     
     public static void main(String[] args) {
         
         MainBinario Arbol = new MainBinario(null);
         Scanner sc = new Scanner(System.in);
+        Scanner date = new Scanner(System.in);
         Scanner in1 = new Scanner(System.in);
         Scanner in2 = new Scanner(System.in);
         Scanner in3 = new Scanner(System.in);
@@ -77,6 +86,53 @@ public class Arboles {
                                 
                                 break;
                                 
+                            case 4:
+                                
+                                Arbol.MostrarHojas(R);
+                                
+                                break;   
+                                
+                            case 5:
+                                
+                                Arbol.MostrarPadres(R);
+                                
+                                break;  
+                                
+                                
+                             case 6:
+                                
+                                 System.out.println("DIGITE EL DATO: ");
+                                 char Dato = date.nextLine().charAt(0);
+                                 int Nivel = Arbol.MostrarNivel(R, 0, Dato); 
+                                 
+                                 if(Nivel == 0)
+                                 {
+                                     System.out.println("Dato no encontrado, sos una locota!");
+                                 }else
+                                 {
+                                     System.out.println("Nivel: "+ Nivel);
+                                 } 
+                                
+                                break; 
+                                
+                             case 7:
+                                
+                                 System.out.println("DIGITE EL DATO: ");
+                                 char DatoH = date.nextLine().charAt(0);
+                                 
+                                 Arbol.MostrarHermanos(R, DatoH);
+                                
+                                break; 
+                                
+                             case 8:
+                                
+                                 System.out.println("DIGITE EL DATO: ");
+                                 char DatoA = date.nextLine().charAt(0);
+                                 
+                                 Arbol.MostrarHermanos(R, DatoA);
+                                
+                                break; 
+                                
                             default:
                                 
                                 System.out.println("OPCIÓN INVALIDA");
@@ -84,7 +140,7 @@ public class Arboles {
                                 break;
                         }
                         
-                    }while(opc2 != 4);
+                    }while(opc2 != 11);
                     
                     break;
                     
@@ -96,6 +152,6 @@ public class Arboles {
             }
             
         
-        }while(opc1 != 3);
+        }while(opc1 != 2);
     }
 }
