@@ -9,7 +9,7 @@ public class Arboles {
     {
         System.out.println("ÁRBOLES");
         System.out.println("-----------------");
-        System.out.println("[1] BINARIO");
+        System.out.println("[1] CREAR ÁRBOL");
         System.out.println("[2] SALIR");
         System.out.println("-----------------");
         System.out.println("Opción: ");
@@ -141,6 +141,21 @@ public class Arboles {
                                  Arbol.Primos(R, DatoPr);
                                  
                                  break;
+
+                            case 10:
+
+                                System.out.println("DIGITE EL DATO: ");
+                                char DatoB = date.nextLine().charAt(0);
+
+                                if(Arbol.ValidarRegistro(Padre, DatoB);)
+                                {
+                                    System.out.println("DADO ENCONTRADO");
+                                }else
+                                {
+                                    System.out.println("ESTE DATO NO EXISTE");
+                                }
+                                
+                            break;
                                 
                             default:
                                 
